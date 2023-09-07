@@ -40,5 +40,3 @@ interface Properties {
 }
 
 export default UniversityCard;
-
-globalThis.standarize = standardizeUniversityName

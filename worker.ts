@@ -16,7 +16,17 @@ class Directories {
 async function serve() {
   let app = await vite.createServer({
     root: Directories.source,
-    mode: 'development'
+    mode: 'development',
+    server: {
+      proxy: {
+        '/curso-objetivo': {
+          target: 'https://www.curso-objetivo.br',
+          changeOrigin: true,
+          secure: true,
+          rewrite: (path) => path.replace(/^\/curso-objetivo/, '')
+        }
+      }
+    }
   });
 
   await app.listen(8080);
