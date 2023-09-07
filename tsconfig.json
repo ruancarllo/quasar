@@ -5,6 +5,7 @@
     "jsxFragmentFactory": "Preact.Fragment",
 
     "esModuleInterop": true,
-    "downlevelIteration": true
+    "downlevelIteration": true,
+    "allowImportingTsExtensions": true
   }
 }
