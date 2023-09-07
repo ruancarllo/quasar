@@ -1,0 +1,17 @@
+{
+  "dependencies": {
+    "fs-extra": "latest",
+    "ts-node": "latest",
+    "preact": "latest",
+    "sass": "latest",
+    "vite": "latest"
+  },
+  "devDependencies": {
+    "@types/node": "latest",
+    "@types/fs-extra": "latest"
+  },
+  "scripts": {
+    "serve": "ts-node worker.ts serve",
+    "build": "ts-node worker.ts build"
+  }
+}

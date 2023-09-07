@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "jsx": "preserve",
+    "jsxFactory": "Preact.h",
+    "jsxFragmentFactory": "Preact.Fragment",
+
+    "esModuleInterop": true,
+    "downlevelIteration": true
+  }
+}
