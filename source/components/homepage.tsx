@@ -11,14 +11,16 @@ class Homepage extends Preact.Component {
   render() {
     return (
       <div class="homepage">
-        <h1>Quasar</h1>
+        <div class="title-box">
+          <h1>Quasar</h1>
+        </div>
         <div class="university-cards"></div>
       </div>
     );
   }
 
   async componentDidMount() {
-    return;
+    return
     const universityCards: Preact.VNode<UniversityCard>[] = new Array();
 
     for (let university of await fetchUniversities()) {
