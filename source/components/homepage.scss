@@ -2,6 +2,38 @@
   width: 100vw;
   height: 100vh;
 
+  gap: 10vw;
+
   display: flex;
   flex-direction: column;
+  align-items: center;
+
+  background-color: #e5dbff;
+
+  .title-box {
+    width: 100vw;
+    height: 40vw;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    padding: 10vw;
+    margin: 0 0 5vw 0;
+    border-radius: 0 0 7.5vw 7.5vw;
+
+    box-shadow: 0 5vw #845ef7;
+
+    background-color: #5f3dc4;
+
+    h1 {
+      font-family: 'Roboto Slab';
+      font-weight: bold;
+  
+      font-size: 10vw;
+
+      color: white;
+    }
+  }
 }
