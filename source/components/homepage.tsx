@@ -20,12 +20,28 @@ class Homepage extends Preact.Component {
   }
 
   async componentDidMount() {
-    return
+    Preact.render(
+      <>
+        <UniversityCard name="uniesquina" url="url"/>
+        <UniversityCard name="uniesquina" url="url"/>
+        <UniversityCard name="uniesquina" url="url"/>
+        <UniversityCard name="uniesquina" url="url"/>
+        <UniversityCard name="uniesquina" url="url"/>
+        <UniversityCard name="uniesquina" url="url"/>
+        <UniversityCard name="uniesquina" url="url"/>
+        <UniversityCard name="uniesquina" url="url"/>
+        <UniversityCard name="uniesquina" url="url"/>
+      </>,
+      document.querySelector('.university-cards')
+    );
+
+    return;
+
     const universityCards: Preact.VNode<UniversityCard>[] = new Array();
 
     for (let university of await fetchUniversities()) {
       const standardizedName = standardizeUniversityName(university.nonStandardizedName);
-      universityCards.push(<UniversityCard standardizedName={standardizedName} url={university.url}/>);
+      universityCards.push(<UniversityCard name={standardizedName} url={university.url}/>);
     }
 
     Preact.render(universityCards, document.querySelector('.university-cards'));
