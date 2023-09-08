@@ -6,14 +6,14 @@ class UniversityCard extends Preact.Component<Properties> {
   render(properties: Properties) {
     return (
       <div class="university-card">
-        <a>{properties.standardizedName}</a>
+        <a class="name">{properties.name}</a>
       </div>
     )
   }
 }
 
 interface Properties {
-  standardizedName: string,
+  name: string,
   url: string
 }
 
