@@ -20,6 +20,18 @@ class Homepage extends Preact.Component {
   }
 
   async componentDidMount() {
+    Preact.render(
+      <>
+        <UniversityCard name="Uni-Esquina" url="URL"/>
+        <UniversityCard name="Uni-Esquina" url="URL"/>
+        <UniversityCard name="Uni-Esquina" url="URL"/>
+        <UniversityCard name="Uni-Esquina" url="URL"/>
+      </>,
+      document.querySelector('.university-cards')
+    )
+
+    return;
+
     const universityCards: Preact.VNode<UniversityCard>[] = new Array();
 
     for (let university of await fetchUniversities()) {
