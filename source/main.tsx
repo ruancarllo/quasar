@@ -1,6 +1,18 @@
 import * as Preact from 'preact';
+import Router from 'preact-router';
 
-import HomePage from './components/home-page.tsx';
-import QuestionsPage from './components/questions-page.tsx';
+import HomePage from './pages/home-page.tsx';
+import QuestionsPage from './pages/questions-page.tsx';
 
-Preact.render(<QuestionsPage universityUrl="/curso-objetivo/vestibular/resolucao_comentada/enem.asp"/>, document.body);
+class Application extends Preact.Component {
+  render() {
+    return (
+      <Router>
+        <HomePage path="/"/>
+        <QuestionsPage path="/questions"/>
+      </Router>
+    );
+  }
+}
+
+Preact.render(<Application/>, document.body);
