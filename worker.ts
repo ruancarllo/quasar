@@ -38,6 +38,7 @@ async function serve() {
 async function build() {
   await vite.build({
     root: Directories.source,
+    base: '',
     mode: 'production',
     publicDir: false,
     build: {
