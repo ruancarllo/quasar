@@ -5,7 +5,7 @@ import path from 'path';
 
 class Directories {
   static source = path.join(__dirname, 'source');
-  static target = path.join(__dirname, 'target');
+  static target = path.join(__dirname, 'docs');
 
   static public = {
     source: path.join(this.source, 'static'),
