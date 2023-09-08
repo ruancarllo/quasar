@@ -1,14 +1,14 @@
 {
   "dependencies": {
     "fs-extra": "latest",
-    "ts-node": "latest",
     "preact": "latest",
     "sass": "latest",
+    "ts-node": "latest",
     "vite": "latest"
   },
   "devDependencies": {
-    "@types/node": "latest",
-    "@types/fs-extra": "latest"
+    "@types/fs-extra": "latest",
+    "@types/node": "latest"
   },
   "scripts": {
     "serve": "ts-node worker.ts serve",

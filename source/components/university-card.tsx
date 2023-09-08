@@ -2,17 +2,21 @@ import * as Preact from 'preact';
 
 import './university-card.scss';
 
-class UniversityCard extends Preact.Component<Properties> {
-  render(properties: Properties) {
+class UniversityCard extends Preact.Component<Props> {
+  constructor(props: Props) {
+    super(props);
+  }
+
+  render() {
     return (
       <div class="university-card">
-        <a class="name">{properties.name}</a>
+        <a class="name">{this.props.name}</a>
       </div>
     )
   }
 }
 
-interface Properties {
+interface Props {
   name: string,
   url: string
 }

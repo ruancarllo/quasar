@@ -1,7 +1,6 @@
 import * as Preact from 'preact';
 
-import Homepage from './components/homepage.tsx';
+import HomePage from './components/home-page.tsx';
+import QuestionsPage from './components/questions-page.tsx';
 
-import beautifyQuestionImage from './utilities/beautify-question-image.ts';
-
-Preact.render(<Homepage/>, document.body);
+Preact.render(<QuestionsPage universityUrl="/curso-objetivo/vestibular/resolucao_comentada/enem.asp"/>, document.body);
