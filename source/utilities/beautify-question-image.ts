@@ -14,7 +14,7 @@ async function beautifyQuestionImage(imageUrl: string): Promise<HTMLImageElement
 
   inputContext.drawImage(inputImage, 0, 0);
 
-  const dynamicImageData = inputContext.getImageData(0, 0, inputImage.naturalWidth, inputImage.naturalHeight);
+  const dynamicImageData = inputContext.getImageData(0, 0, inputCanvas.width, inputCanvas.height);
 
   for (let i = 0; i < dynamicImageData.data.length; i += 4) {
     const red = dynamicImageData.data[i];

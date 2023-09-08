@@ -2,15 +2,15 @@ import * as Preact from 'preact';
 
 import './homepage.scss'
 
-import UniversityCard from '../components/university-card.tsx';
+import UniversityCard from './university-card.tsx';
 
 import fetchUniversities from '../utilities/fetch-universities.ts';
 import standardizeUniversityName from '../utilities/standardize-university-name.ts';
 
-class Homepage extends Preact.Component {
+class HomePage extends Preact.Component {
   render() {
     return (
-      <div class="homepage">
+      <div class="home-page">
         <div class="title-box">
           <h1>Quasar</h1>
         </div>
@@ -43,4 +43,4 @@ class Homepage extends Preact.Component {
   }
 }
 
-export default Homepage;
+export default HomePage;
