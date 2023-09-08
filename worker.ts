@@ -16,7 +16,7 @@ class Directories {
 async function serve() {
   let app = await vite.createServer({
     root: Directories.source,
-    mode: 'development',
+    mode: 'production',
     server: {
       proxy: {
         '/curso-objetivo': {
@@ -26,13 +26,15 @@ async function serve() {
           rewrite: (path) => path.replace(/^\/curso-objetivo/, '')
         }
       },
-      host: true
-    }
+      host: true,
+      hmr: false
+    },
+    base: '/quasar'
   });
 
   await app.listen(8080);
 
-  console.log(`App running at http://localhost:${app.config.server.port}`);
+  console.log(`App running in port ${app.config.server.port}`);
 }
 
 async function build() {

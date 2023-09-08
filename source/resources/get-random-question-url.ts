@@ -1,6 +1,6 @@
 import getArrayRandomItem from './get-array-random-item.ts';
 import uniteHyperlinks from './unite-hyperlinks.ts';
-import apiEntrypoints from './api-entrypoints.ts';
+import networkPathes from './network-pathes.ts';
 
 async function getRandomQuestionUrl(universityUrl: string): Promise<string> {
   const examsRequest = await fetch(universityUrl);
@@ -27,7 +27,7 @@ async function getRandomQuestionUrl(universityUrl: string): Promise<string> {
 
   const hostRegularExpression = /^https?:\/\/([A-Za-z0-9.-]+)/g;
 
-  const randomQuestionUrl = randomQuestionFullUrl.replace(hostRegularExpression, apiEntrypoints.cursoObjetivo);
+  const randomQuestionUrl = randomQuestionFullUrl.replace(hostRegularExpression, networkPathes.cursoObjetivo);
 
   return randomQuestionUrl;
 }

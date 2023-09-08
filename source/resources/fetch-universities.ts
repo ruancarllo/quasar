@@ -1,10 +1,10 @@
-import apiEntrypoints from "./api-entrypoints.ts";
+import networkPathes from "./network-pathes.ts";
 import uniteHyperlinks from './unite-hyperlinks.ts';
 
 async function fetchUniversities(): Promise<University[]> {
   const universities: University[] = new Array();
 
-  const entrypoint = `${apiEntrypoints.cursoObjetivo}/vestibular/resolucao_comentada.aspx`;
+  const entrypoint = `${networkPathes.cursoObjetivo}/vestibular/resolucao_comentada.aspx`;
   const request = await fetch(entrypoint);
   const html = await request.text();
 

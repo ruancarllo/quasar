@@ -2,6 +2,8 @@ import * as Preact from 'preact';
 
 import './university-card.scss';
 
+import networkPathes from '../resources/network-pathes';
+
 class UniversityCard extends Preact.Component<Properties> {
   constructor(properties: Properties) {
     super(properties);
@@ -16,7 +18,7 @@ class UniversityCard extends Preact.Component<Properties> {
   }
 
   goToQuestionsPage(universityUrl: string) {
-    window.location.href = `/questions?universityUrl=${universityUrl}`
+    window.location.href = `${networkPathes.base}/questions?universityUrl=${universityUrl}`
   }
 }
 
