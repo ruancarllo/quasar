@@ -1,15 +1,15 @@
 import * as Preact from 'preact';
 
+import getRandomQuestionUrl from '../resources/get-random-question-url';
+import beautifyQuestionImage from '../resources/beautify-question-image';
+
 import './question-card.scss';
 
-import getRandomQuestionUrl from '../utilities/get-random-question-url';
-import beautifyQuestionImage from '../utilities/beautify-question-image';
-
-class QuestionCard extends Preact.Component<Props> {
+class QuestionCard extends Preact.Component<Properties> {
   reference: Preact.RefObject<HTMLImageElement>;
 
-  constructor(props: Props) {
-    super(props);
+  constructor(properties: Properties) {
+    super(properties);
 
     this.reference = Preact.createRef();
   }
@@ -37,7 +37,6 @@ class QuestionCard extends Preact.Component<Props> {
           const questionCard = renderer.querySelector('.question-card');
           
           this.reference.current.parentElement.append(questionCard);
-
         }
       }
     }
@@ -51,7 +50,7 @@ class QuestionCard extends Preact.Component<Props> {
   }
 }
 
-interface Props {
+interface Properties {
   universityUrl: string
 }
 

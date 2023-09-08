@@ -1,11 +1,11 @@
 import * as Preact from 'preact';
 
-import './homepage.scss'
+import UniversityCard from '../components/university-card.tsx';
 
-import UniversityCard from './university-card.tsx';
+import fetchUniversities from '../resources/fetch-universities.ts';
+import standardizeUniversityName from '../resources/standardize-university-name.ts';
 
-import fetchUniversities from '../utilities/fetch-universities.ts';
-import standardizeUniversityName from '../utilities/standardize-university-name.ts';
+import './home-page.scss'
 
 class HomePage extends Preact.Component {
   render() {
@@ -20,18 +20,6 @@ class HomePage extends Preact.Component {
   }
 
   async componentDidMount() {
-    Preact.render(
-      <>
-        <UniversityCard name="Uni-Esquina" url="URL"/>
-        <UniversityCard name="Uni-Esquina" url="URL"/>
-        <UniversityCard name="Uni-Esquina" url="URL"/>
-        <UniversityCard name="Uni-Esquina" url="URL"/>
-      </>,
-      document.querySelector('.university-cards')
-    )
-
-    return;
-
     const universityCards: Preact.VNode<UniversityCard>[] = new Array();
 
     for (let university of await fetchUniversities()) {
