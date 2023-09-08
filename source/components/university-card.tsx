@@ -1,7 +1,5 @@
 import * as Preact from 'preact';
 
-import QuestionsPage from '../pages/questions-page';
-
 import './university-card.scss';
 
 class UniversityCard extends Preact.Component<Properties> {
