@@ -25,7 +25,8 @@ async function serve() {
           secure: true,
           rewrite: (path) => path.replace(/^\/curso-objetivo/, '')
         }
-      }
+      },
+      host: true
     }
   });
 
