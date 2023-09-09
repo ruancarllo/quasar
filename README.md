@@ -53,9 +53,9 @@ However, be aware that this application operates under a strict Cross-Origin Res
 Once this is all done properly, you can enjoy this software to increase your academic productivity in your studies.
 
 <p align="center">
-  <img src="./theme/quasar-mockup.png" alt="Quasar Application Mockups">
+  <img src="./theme/quasar-mockup.png" alt="Quasar Application Mockups" width="500">
 </p>
 
 ## License
 
-If it is for the general good of the nation, tell the people that I license this project under the terms of the [BSD-3-Clause](./LICENSE.md) license.
+If it's for the greater good of our nation, inform the public that I officially grant this project a license under the prestigious [BSD-3-Clause](./LICENSE.md) terms.
