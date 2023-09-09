@@ -4,22 +4,32 @@ import QuestionCard from './question-card';
 import getRenderedComponent from '../helpers/get-rendered-component';
 
 class QuestionLoader extends Preact.Component<Properties> {
-  reference: Preact.RefObject<HTMLDivElement>;
+  questionLoaderReference: Preact.RefObject<HTMLDivElement>;
+  spinnerReference: Preact.RefObject<HTMLDivElement>;
 
   constructor(properties: Properties) {
     super(properties);
-    this.reference = Preact.createRef();
+    this.questionLoaderReference = Preact.createRef();
+    this.spinnerReference = Preact.createRef();
   }
 
   render() {
     return (
-      <div ref={this.reference} style={Styles.QuestionLoader} class="question-loader">
-        <div style={Styles.Spinner} class="spinner"></div>
+      <div ref={this.questionLoaderReference} style={Styles.QuestionLoader} class="question-loader">
+        <div ref={this.spinnerReference} style={Styles.Spinner} class="spinner"></div>
       </div>
     )
   }
 
   async componentDidMount() {
+    this.spinnerReference.current.animate([
+      {transform: 'rotate(0deg)'},
+      {transform: 'rotate(360deg)'},
+    ], {
+      duration: 1000,
+      iterations: Infinity
+    });
+
     const intersectionHandler: IntersectionObserverCallback = (entries) => {
       for (let entry of entries) {
         if (entry.isIntersecting) {
@@ -34,7 +44,7 @@ class QuestionLoader extends Preact.Component<Properties> {
     }
 
     const observer = new IntersectionObserver(intersectionHandler, observerOptions)
-    observer.observe(this.reference.current);
+    observer.observe(this.questionLoaderReference.current);
   }
 }
 
@@ -54,9 +64,7 @@ class Styles {
 
     border: '1vw solid #5f3dc4',
     borderTop: '1vw solid transparent',
-    borderRadius: '50%',
-
-    animation: 'spin 1s linear infinite'
+    borderRadius: '50%'
   }
 }
 
