@@ -5,7 +5,7 @@ import path from 'path';
 
 class Directories {
   static source = path.join(__dirname, 'source');
-  static target = path.join(__dirname, 'docs');
+  static target = path.join(__dirname, 'target');
 
   static public = {
     source: path.join(this.source, 'static'),
@@ -14,7 +14,7 @@ class Directories {
 }
 
 async function serve() {
-  let app = await vite.createServer({
+  const app = await vite.createServer({
     root: Directories.source,
     mode: 'production',
     server: {
@@ -55,11 +55,11 @@ async function build() {
     }
   });
   
-  let indexPath = path.join(Directories.target, 'index.html');
-  let indexContent = fs.readFileSync(indexPath, 'utf-8');
+  const indexPath = path.join(Directories.target, 'index.html');
+  const indexContent = fs.readFileSync(indexPath, 'utf-8');
 
-  let indexFilteredLines = indexContent.split('\n').filter((item) => item.trim());
-  let indexFilteredContent = indexFilteredLines.join('\n');
+  const indexFilteredLines = indexContent.split('\n').filter((item) => item.trim());
+  const indexFilteredContent = indexFilteredLines.join('\n');
 
   fs.writeFileSync(indexPath, indexFilteredContent);
   fs.copy(Directories.public.source, Directories.public.target, (error) => null);
