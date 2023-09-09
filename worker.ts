@@ -16,7 +16,7 @@ class Directories {
 async function serve() {
   let app = await vite.createServer({
     root: Directories.source,
-    mode: 'development',
+    mode: 'production',
     server: {
       proxy: {
         '/curso-objetivo': {

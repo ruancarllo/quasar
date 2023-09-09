@@ -1,20 +1,17 @@
 import * as Preact from 'preact';
 
 import UniversityCard from '../components/university-card.tsx';
-
 import fetchUniversities from '../resources/fetch-universities.ts';
 import standardizeUniversityName from '../resources/standardize-university-name.ts';
-
-import './home-page.scss'
 
 class HomePage extends Preact.Component {
   render() {
     return (
-      <section class="home-page">
-        <div class="title-box">
-          <h1>Quasar</h1>
+      <section style={Styles.HomePage} class="home-page">
+        <div style={Styles.TitleBox} class="title-box">
+          <h1 style={Styles.Title}>Quasar</h1>
         </div>
-        <div class="university-cards"></div>
+        <div style={Styles.UniversityCards} class="university-cards"></div>
       </section>
     );
   }
@@ -28,6 +25,52 @@ class HomePage extends Preact.Component {
     }
 
     Preact.render(universityCards, document.querySelector('.university-cards'));
+  }
+}
+
+class Styles {
+  static HomePage: Preact.JSX.CSSProperties = {
+    width: '100vw',
+    minHeight: '100vh',
+
+    gap: '10vw',
+
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+
+    backgroundColor: '#e5dbff'
+  }
+
+  static TitleBox: Preact.JSX.CSSProperties = {
+    width: '100vw',
+    height: '30vw',
+
+    padding: '10vw',
+    borderRadius: '0vw 0vw 7.5vw 7.5vw',
+
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+
+    boxShadow: '0vw 0vw 2vw 0vw #5f3dc4',
+    backgroundColor: '#7048e8'
+  }
+
+  static Title: Preact.JSX.CSSProperties = {
+    fontFamily: 'Roboto Slab',
+    fontWeight: 'bold',
+    fontSize: '10vw',
+    color: '#f3f0ff'
+  }
+
+  static UniversityCards: Preact.JSX.CSSProperties = {
+    padding: '0 0 7.5vw 0',
+    gap: '7.5vw',
+
+    display: 'flex',
+    flexDirection: 'column'
   }
 }
 
