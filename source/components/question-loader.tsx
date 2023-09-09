@@ -1,10 +1,7 @@
 import * as Preact from 'preact';
 
 import QuestionCard from './question-card';
-
 import getRenderedComponent from '../helpers/get-rendered-component';
-
-import './question-loader.scss';
 
 class QuestionLoader extends Preact.Component<Properties> {
   reference: Preact.RefObject<HTMLDivElement>;
@@ -16,8 +13,8 @@ class QuestionLoader extends Preact.Component<Properties> {
 
   render() {
     return (
-      <div ref={this.reference} class="question-loader">
-        <div class="spinner"></div>
+      <div ref={this.reference} style={Styles.QuestionLoader} class="question-loader">
+        <div style={Styles.Spinner} class="spinner"></div>
       </div>
     )
   }
@@ -38,6 +35,28 @@ class QuestionLoader extends Preact.Component<Properties> {
 
     const observer = new IntersectionObserver(intersectionHandler, observerOptions)
     observer.observe(this.reference.current);
+  }
+}
+
+class Styles {
+  static QuestionLoader: Preact.JSX.CSSProperties = {
+    width: '100%',
+
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center'
+  }
+
+  static Spinner: Preact.JSX.CSSProperties = {
+    width: '8vw',
+    height: '8vw',
+
+    border: '1vw solid #5f3dc4',
+    borderTop: '1vw solid transparent',
+    borderRadius: '50%',
+
+    animation: 'spin 1s linear infinite'
   }
 }
 
