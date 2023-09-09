@@ -28,7 +28,7 @@ class QuestionsPage extends Preact.Component {
 
     const questionCards: Preact.VNode<QuestionCard>[] = [];
 
-    for (let count = 0; count < 1; count++) {
+    for (let count = 0; count < FIRST_QUESTION_CARDS_COUNT; count++) {
       questionCards.push(<QuestionCard universityUrl={universityUrl}/>);
     }
 
@@ -66,5 +66,7 @@ class Styles {
     alignItems: 'inherit',
   }
 }
+
+const FIRST_QUESTION_CARDS_COUNT = 5;
 
 export default QuestionsPage;

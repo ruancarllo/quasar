@@ -9,7 +9,6 @@ class QuestionCard extends Preact.Component<Properties> {
 
   constructor(properties: Properties) {
     super(properties);
-
     this.reference = Preact.createRef();
   }
 
@@ -28,7 +27,6 @@ class QuestionCard extends Preact.Component<Properties> {
     }
 
     finally {
-      return;
       const intersectionHandler: IntersectionObserverCallback = (entries) => {
         for (let entry of entries) {
           if (entry.isIntersecting) {

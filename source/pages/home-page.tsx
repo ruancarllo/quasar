@@ -9,7 +9,7 @@ class HomePage extends Preact.Component {
     return (
       <section style={Styles.HomePage} class="home-page">
         <div style={Styles.TitleBox} class="title-box">
-          <h1 style={Styles.Title}>Quasar</h1>
+          <h1 style={Styles.Title} class="title">Quasar</h1>
         </div>
         <div style={Styles.UniversityCards} class="university-cards"></div>
       </section>
@@ -17,14 +17,20 @@ class HomePage extends Preact.Component {
   }
 
   async componentDidMount() {
-    const universityCards: Preact.VNode<UniversityCard>[] = new Array();
+    try {
+      const universityCards: Preact.VNode<UniversityCard>[] = new Array();
 
-    for (let university of await fetchUniversities()) {
-      const standardizedName = standardizeUniversityName(university.nonStandardizedName);
-      universityCards.push(<UniversityCard name={standardizedName} url={university.url}/>);
+      for (let university of await fetchUniversities()) {
+        const standardizedName = standardizeUniversityName(university.nonStandardizedName);
+        universityCards.push(<UniversityCard name={standardizedName} url={university.url}/>);
+      }
+
+      Preact.render(universityCards, document.querySelector('.university-cards'));
     }
 
-    Preact.render(universityCards, document.querySelector('.university-cards'));
+    catch(exception) {
+      alert("Serviço indisponível no momento!");
+    }
   }
 }
 

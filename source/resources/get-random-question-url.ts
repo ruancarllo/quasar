@@ -34,10 +34,12 @@ async function getRandomQuestionUrl(universityUrl: string, tries = 0): Promise<s
   }
 
   catch(exception) {
-    if (tries <= 3) {
+    if (tries <= TRIES_LIMIT) {
       return getRandomQuestionUrl(universityUrl, ++tries);
     }
   }
 }
+
+const TRIES_LIMIT = 3;
 
 export default getRandomQuestionUrl;
