@@ -26,8 +26,6 @@ class QuestionsPage extends Preact.Component {
     const urlSearchParams = new URLSearchParams(window.location.search);
     const universityUrl = decodeURIComponent(urlSearchParams.get('universityUrl'));
 
-    document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff');
-
     const questionCards: Preact.VNode<QuestionCard>[] = [];
 
     for (let count = 0; count < 1; count++) {
