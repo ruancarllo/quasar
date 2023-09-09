@@ -1,13 +1,26 @@
 import * as Preact from 'preact';
 
 import QuestionCard from '../components/question-card.tsx';
+import QuestionLoader from '../components/question-loader.tsx';
 
 import './questions-page.scss';
 
 class QuestionsPage extends Preact.Component {
+  questionsContainerReference: Preact.RefObject<HTMLDivElement>;
+  laoderContainerReference: Preact.RefObject<HTMLDivElement>;
+
+  constructor() {
+    super();
+    this.questionsContainerReference = Preact.createRef();
+    this.laoderContainerReference = Preact.createRef();
+  }
+
   render() {
     return (
-      <div class="questions-page"></div>
+      <section class="questions-page">
+        <div ref={this.questionsContainerReference} class="questions-container"></div>
+        <div ref={this.laoderContainerReference} class="loader-container"></div>
+      </section>
     );
   }
 
@@ -19,11 +32,12 @@ class QuestionsPage extends Preact.Component {
 
     const questionCards: Preact.VNode<QuestionCard>[] = [];
 
-    for (let count = 0; count < 5; count++) {
+    for (let count = 0; count < 1; count++) {
       questionCards.push(<QuestionCard universityUrl={universityUrl}/>);
     }
 
-    Preact.render(questionCards, document.querySelector('.questions-page'));
+    Preact.render(questionCards, this.questionsContainerReference.current);
+    Preact.render(<QuestionLoader universityUrl={universityUrl}/>, this.laoderContainerReference.current);
   }
 }
 

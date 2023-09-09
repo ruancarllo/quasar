@@ -1,39 +1,31 @@
 import * as Preact from 'preact';
 
-import getRandomQuestionUrl from '../resources/get-random-question-url';
-import beautifyQuestionImage from '../resources/beautify-question-image';
+import QuestionCard from './question-card';
+
 import getRenderedComponent from '../helpers/get-rendered-component';
 
-import './question-card.scss';
+import './question-loader.scss';
 
-class QuestionCard extends Preact.Component<Properties> {
-  reference: Preact.RefObject<HTMLImageElement>;
+class QuestionLoader extends Preact.Component<Properties> {
+  reference: Preact.RefObject<HTMLDivElement>;
 
   constructor(properties: Properties) {
     super(properties);
-
     this.reference = Preact.createRef();
   }
 
   render() {
     return (
-      <img ref={this.reference} class="question-card"/>
-    );
+      <div ref={this.reference} class="question-loader">
+        <div class="spinner"></div>
+      </div>
+    )
   }
 
   async componentDidMount() {
-    const randomQuestionUrl = await getRandomQuestionUrl(this.props.universityUrl);
-    const beautifiedQuestionImage = await beautifyQuestionImage(randomQuestionUrl);
-
-    this.reference.current.src = beautifiedQuestionImage.src;
-
-    return;
-
     const intersectionHandler: IntersectionObserverCallback = (entries) => {
       for (let entry of entries) {
         if (entry.isIntersecting) {
-          observer.disconnect();
-
           const questionCard = getRenderedComponent(<QuestionCard universityUrl={this.props.universityUrl}/>);
           document.querySelector('.questions-container').append(questionCard);
         }
@@ -41,7 +33,7 @@ class QuestionCard extends Preact.Component<Properties> {
     }
 
     const observerOptions: IntersectionObserverInit = {
-      threshold: 0.5
+      threshold: 0.75
     }
 
     const observer = new IntersectionObserver(intersectionHandler, observerOptions)
@@ -53,4 +45,4 @@ interface Properties {
   universityUrl: string
 }
 
-export default QuestionCard;
+export default QuestionLoader;
