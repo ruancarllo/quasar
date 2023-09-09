@@ -3,20 +3,38 @@ import * as Preact from 'preact';
 import networkPathes from '../resources/network-pathes';
 
 class UniversityCard extends Preact.Component<Properties> {
+  reference: Preact.RefObject<HTMLDivElement>;
+
   constructor(properties: Properties) {
     super(properties);
+    this.reference = Preact.createRef();
   }
 
   render() {
     return (
-      <div style={Styles.UniversityCard} onClick={() => this.goToQuestionsPage(this.props.url)} class="university-card">
+      <div ref={this.reference} style={Styles.UniversityCard} class="university-card">
         <a style={Styles.UniversityName} class="university-name">{this.props.name}</a>
       </div>
     )
   }
 
-  goToQuestionsPage(universityUrl: string) {
-    window.location.href = `${networkPathes.base}/questions?universityUrl=${universityUrl}`
+  componentDidMount() {
+    this.reference.current.addEventListener('click', () => {
+      const animationKeyframes: Keyframe[] = [
+        {transform: 'scale(1)'},
+        {transform: 'scale(1.075)'},
+        {transform: 'scale(1)'}
+      ]
+
+      const animationOptions: KeyframeAnimationOptions = {
+        duration: 750,
+        easing: 'ease-out'
+      }
+
+      this.reference.current.animate(animationKeyframes, animationOptions);
+
+      window.location.href = `${networkPathes.base}/questions?universityUrl=${this.props.url}`;
+    });
   }
 }
 
