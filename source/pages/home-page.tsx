@@ -10,12 +10,12 @@ import './home-page.scss'
 class HomePage extends Preact.Component {
   render() {
     return (
-      <div class="home-page">
+      <section class="home-page">
         <div class="title-box">
           <h1>Quasar</h1>
         </div>
         <div class="university-cards"></div>
-      </div>
+      </section>
     );
   }
 
