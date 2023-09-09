@@ -1,10 +1,9 @@
 {
   "dependencies": {
+    "ts-node": "latest",
     "fs-extra": "latest",
     "preact": "latest",
-    "preact-router": "^4.1.2",
     "sass": "latest",
-    "ts-node": "latest",
     "vite": "latest"
   },
   "devDependencies": {
