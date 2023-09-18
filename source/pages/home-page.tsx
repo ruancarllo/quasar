@@ -1,7 +1,7 @@
 import * as Preact from 'preact';
 
 import UniversityCard from '../components/university-card.tsx';
-import fetchUniversities from '../resources/fetch-universities.ts';
+import {fetchUniversitiesSync} from '../resources/fetch-universities.ts';
 import standardizeUniversityName from '../resources/standardize-university-name.ts';
 
 class HomePage extends Preact.Component {
@@ -20,7 +20,7 @@ class HomePage extends Preact.Component {
     try {
       const universityCards: Preact.VNode<UniversityCard>[] = new Array();
 
-      for (let university of await fetchUniversities()) {
+      for (let university of fetchUniversitiesSync()) {
         const standardizedName = standardizeUniversityName(university.nonStandardizedName);
         universityCards.push(<UniversityCard name={standardizedName} url={university.url}/>);
       }
