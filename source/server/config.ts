@@ -1,6 +1,10 @@
+import path from 'path';
+
 const Config = {
-  sourcePath: './source',
-  cachePath: './temp',
+  sourcePath: path.join('source'),
+  cachePath: path.join('temp'),
+  dataPath: path.join('source', 'server', 'data'),
+
   appPath: '/quasar',
 }
 

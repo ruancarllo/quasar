@@ -1,7 +1,5 @@
 /// <reference lib="dom"/>
 
-import areColorsSimilar from "@resources/are-colors-similar";
-
 async function beautifyQuestionImage(imageUrl: string): Promise<HTMLImageElement | undefined> {
   const inputImage = new Image();
   inputImage.src = imageUrl;
@@ -42,6 +40,14 @@ async function beautifyQuestionImage(imageUrl: string): Promise<HTMLImageElement
   return outputImage;
 }
 
+function areColorsSimilar(firstColor: Color, secondColor: Color, tolerance = 20) {
+  const redDifference = Math.abs(firstColor.red - secondColor.red);
+  const greenDifference = Math.abs(firstColor.green - secondColor.green);
+  const blueDifference = Math.abs(firstColor.blue - secondColor.blue);
+
+  return redDifference <= tolerance && greenDifference <= greenDifference && blueDifference <= tolerance;
+}
+
 const cursoObjetivoWatermarkColor = {
   red: 220,
   green: 230,
@@ -52,6 +58,12 @@ const whiteColor = {
   red: 255,
   green: 255,
   blue: 255
+}
+
+interface Color {
+  red: number,
+  green: number,
+  blue: number
 }
 
 export default beautifyQuestionImage;

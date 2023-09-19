@@ -11,22 +11,30 @@ import QuestionsPage from '@pages/questions-page';
 
 import Config from '@server/config';
 
+let universitiiesData: {[universityName: string]: Array<string>} = {}
+
 class Server {
   public static async handleRequest(request: Request) {
-    fs.appendFileSync('logs.txt', `${new Date().toUTCString()}: ${JSON.stringify(request.headers)}\n`);
-
     const requestURL = new URL(request.url);
     const requestedPath = requestURL.pathname.replace(Config.appPath, '');
     const requestedFilePath = path.join(Config.sourcePath, requestedPath);
 
-    if (requestURL.pathname.startsWith('/curso-objetivo')) {
-      const parameters = requestURL.pathname.replace('/curso-objetivo', '');
-      const response = await fetch('https://www.curso-objetivo.br' + parameters);
+    if (requestURL.pathname.startsWith('/random-question')) {
+      const searchParameters = new URLSearchParams(requestURL.search);
+      const universityName = searchParameters.get('universityName');
 
-      if (response.status !== 200) return new Response(null, {status: 500});
+      if (!universityName) return new Response(null, {status: 500});
+      if (!universitiiesData[universityName]) return new Response(null, {status: 404});
 
-      const blob = await response.blob();
-      return new Response(blob);
+      const randomIndex = Math.floor(Math.random() * universitiiesData[universityName].length)
+      const randomQuestionURL = universitiiesData[universityName][randomIndex];
+
+      const imageRequest = await fetch(randomQuestionURL);
+      if (imageRequest.status !== 200) return new Response(null, {status: 500});
+
+      const imageBlob = await imageRequest.blob();
+
+      return new Response(imageBlob);
     }
 
     if (requestURL.pathname.startsWith(Config.appPath)) {
@@ -74,6 +82,18 @@ class Server {
 
     return await buildOutput.outputs[0].arrayBuffer();
   }
+}
+
+const universityDataPathes = fs.readdirSync(Config.dataPath);
+
+for (const relativePath of universityDataPathes) {
+  const universityDataPath = path.join(Config.dataPath, relativePath);
+  const universityName = relativePath.replace(/\.json$/g, '');
+
+  const universityRawData = fs.readFileSync(universityDataPath, 'utf-8');
+  const universityParsedData = JSON.parse(universityRawData);
+
+  universitiiesData[universityName] = universityParsedData;
 }
 
 Bun.serve({
