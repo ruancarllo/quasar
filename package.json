@@ -14,7 +14,7 @@
   },
 
   "scripts": {
-    "serve": "bun run --watch --hot source/server/worker.tsx",
+    "serve": "bun run source/server/worker.tsx",
     "dev": "bun run --watch --hot source/server/worker.tsx dev"
   }
 }
