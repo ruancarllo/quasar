@@ -2,7 +2,7 @@
 
 import React from 'react';
 
-import getRandomQuestionUrl from '@resources/get-random-question-url';
+import getRandomQuestionURL from '@resources/get-random-question';
 import beautifyQuestionImage from '@resources/beautify-question-image';
 
 import addNode from '@helpers/add-node';
@@ -44,7 +44,7 @@ class QuestionCard extends React.Component<Properties> {
     }
 
     try {
-      const randomQuestionUrl = await getRandomQuestionUrl(this.props.universityUrl);
+      const randomQuestionUrl = await getRandomQuestionURL(this.props.universityName);
       if (!randomQuestionUrl) return;
 
       const beautifiedQuestionImage = await beautifyQuestionImage(randomQuestionUrl);
@@ -62,7 +62,7 @@ class QuestionCard extends React.Component<Properties> {
         for (let entry of entries) {
           if (entry.isIntersecting) {
             observer.disconnect();
-            addNode('#questions-container', <QuestionCard universityUrl={this.props.universityUrl}/>);
+            addNode('#questions-container', <QuestionCard universityName={this.props.universityName}/>);
           }
         }
       }
@@ -84,7 +84,7 @@ class Styles {
 }
 
 interface Properties {
-  universityUrl: string
+  universityName: string
 }
 
 export default QuestionCard;

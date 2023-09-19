@@ -35,7 +35,7 @@ class UniversityCard extends React.Component<Properties> {
 
       this.reference.current?.animate(animationKeyframes, animationOptions);
 
-      window.open(`questions?universityUrl=${this.props.url}`, '_self');
+      window.open(`questions?universityName=${encodeURIComponent(this.props.name)}`, '_self');
     });
   }
 }
@@ -65,8 +65,7 @@ class Styles {
 }
 
 interface Properties {
-  name: string,
-  url: string
+  name: string
 }
 
 export default UniversityCard;

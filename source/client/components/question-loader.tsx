@@ -1,7 +1,6 @@
 /// <reference lib="dom"/>
 
 import React from 'react';
-
 import QuestionCard from '@components/question-card';
 
 import addNode from '@helpers/add-node';
@@ -40,7 +39,7 @@ class QuestionLoader extends React.Component<Properties> {
     const intersectionHandler: IntersectionObserverCallback = (entries) => {
       for (let entry of entries) {
         if (entry.isIntersecting) {
-          addNode('#questions-container', <QuestionCard universityUrl={this.props.universityUrl}/>);
+          addNode('#questions-container', <QuestionCard universityName={this.props.universityUrl}/>);
         }
       }
     }
