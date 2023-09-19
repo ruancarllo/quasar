@@ -1,6 +1,8 @@
-import areColorsSimilar from "./are-colors-similar";
+/// <reference lib="dom"/>
 
-async function beautifyQuestionImage(imageUrl: string): Promise<HTMLImageElement> {
+import areColorsSimilar from "@resources/are-colors-similar";
+
+async function beautifyQuestionImage(imageUrl: string): Promise<HTMLImageElement | undefined> {
   const inputImage = new Image();
   inputImage.src = imageUrl;
 
@@ -8,6 +10,8 @@ async function beautifyQuestionImage(imageUrl: string): Promise<HTMLImageElement
 
   const inputCanvas = document.createElement('canvas');
   const inputContext = inputCanvas.getContext('2d');
+
+  if (!inputContext) return;
 
   inputCanvas.width = inputImage.naturalWidth;
   inputCanvas.height = inputImage.naturalHeight;

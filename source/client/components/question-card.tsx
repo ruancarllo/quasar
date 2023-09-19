@@ -1,11 +1,14 @@
-import * as Preact from 'preact';
+/// <reference lib="dom"/>
 
-import getRandomQuestionUrl from '../resources/get-random-question-url';
-import beautifyQuestionImage from '../resources/beautify-question-image';
-import getRenderedComponent from '../helpers/get-rendered-component';
+import React from 'react';
 
-class QuestionCard extends Preact.Component<Properties> {
-  reference: Preact.RefObject<HTMLImageElement>;
+import getRandomQuestionUrl from '@resources/get-random-question-url';
+import beautifyQuestionImage from '@resources/beautify-question-image';
+
+import addNode from '@helpers/add-node';
+
+class QuestionCard extends React.Component<Properties> {
+  reference: React.RefObject<HTMLImageElement>;
   index: number;
 
   constructor(properties: Properties) {
@@ -18,23 +21,23 @@ class QuestionCard extends Preact.Component<Properties> {
       globalThis.questionCardPromiseResolvers = new Array();
     }
 
-    this.reference = Preact.createRef();
+    this.reference = React.createRef();
     this.index = globalThis.questionCardCount++;
 
-    let cardPromiseResolver: (value: unknown) => void;
-    let cardPromise = new Promise((resolve) => cardPromiseResolver = resolve);
-
-    globalThis.questionCardPromises[this.index] = cardPromise;
-    globalThis.questionCardPromiseResolvers[this.index] = cardPromiseResolver;
+    globalThis.questionCardPromises[this.index] = new Promise((resolve) => {
+      globalThis.questionCardPromiseResolvers[this.index] = resolve;
+    });
   }
 
   render() {
     return (
-      <img ref={this.reference} style={Styles.QuestionCard} class="question-card" id={this.index.toString()}/>
+      <img ref={this.reference} style={Styles.QuestionCard} id={this.index.toString()}/>
     );
   }
 
   async componentDidMount() {
+    if (!this.reference.current) return;
+    
     this.reference.current.onload = () => {
       globalThis.questionCardPromiseResolvers[this.index]();
       globalThis.questionCardPromiseResolvers[this.index] = undefined;
@@ -42,7 +45,10 @@ class QuestionCard extends Preact.Component<Properties> {
 
     try {
       const randomQuestionUrl = await getRandomQuestionUrl(this.props.universityUrl);
+      if (!randomQuestionUrl) return;
+
       const beautifiedQuestionImage = await beautifyQuestionImage(randomQuestionUrl);
+      if (!beautifiedQuestionImage) return;
 
       for (let promiseCount = 0; promiseCount < this.index; promiseCount++) {
         await globalThis.questionCardPromises[promiseCount];
@@ -56,9 +62,7 @@ class QuestionCard extends Preact.Component<Properties> {
         for (let entry of entries) {
           if (entry.isIntersecting) {
             observer.disconnect();
-  
-            const questionCard = getRenderedComponent(<QuestionCard universityUrl={this.props.universityUrl}/>);
-            document.querySelector('.questions-container').append(questionCard);
+            addNode('#questions-container', <QuestionCard universityUrl={this.props.universityUrl}/>);
           }
         }
       }
@@ -67,15 +71,15 @@ class QuestionCard extends Preact.Component<Properties> {
         threshold: 0.5
       }
   
-      const observer = new IntersectionObserver(intersectionHandler, observerOptions)
+      const observer = new IntersectionObserver(intersectionHandler, observerOptions);
       observer.observe(this.reference.current);
     }
   }
 }
 
 class Styles {
-  static QuestionCard: Preact.JSX.CSSProperties = {
-    width: '100%',
+  static QuestionCard: React.CSSProperties = {
+    width: '90vw',
   }
 }
 

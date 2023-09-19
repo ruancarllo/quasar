@@ -1,17 +1,20 @@
 {
+  "name": "quasar",
+
   "dependencies": {
-    "ts-node": "latest",
-    "fs-extra": "latest",
-    "preact": "latest",
-    "sass": "latest",
-    "vite": "latest"
+    "react": "18.2.0",
+    "react-dom": "18.2.0"
   },
+
   "devDependencies": {
-    "@types/fs-extra": "latest",
-    "@types/node": "latest"
+    "typescript": "5.2.2",
+    "bun-types": "1.0.2",
+    "@types/react": "18.2.21",
+    "@types/react-dom": "18.2.7"
   },
+
   "scripts": {
-    "serve": "ts-node worker.ts serve",
-    "build": "ts-node worker.ts build"
+    "serve": "bun run --watch --hot source/server/worker.tsx",
+    "dev": "bun run --watch --hot source/server/worker.tsx dev"
   }
 }

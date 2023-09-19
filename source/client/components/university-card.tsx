@@ -1,24 +1,26 @@
-import * as Preact from 'preact';
+/// <reference lib="dom"/>
 
-import networkPathes from '../resources/network-pathes';
+import React from 'react';
 
-class UniversityCard extends Preact.Component<Properties> {
-  reference: Preact.RefObject<HTMLDivElement>;
+class UniversityCard extends React.Component<Properties> {
+  reference: React.RefObject<HTMLDivElement>;
 
   constructor(properties: Properties) {
     super(properties);
-    this.reference = Preact.createRef();
+    this.reference = React.createRef();
   }
 
   render() {
     return (
-      <div ref={this.reference} style={Styles.UniversityCard} class="university-card">
-        <a style={Styles.UniversityName} class="university-name">{this.props.name}</a>
+      <div ref={this.reference} style={Styles.UniversityCard} id="university-card">
+        <a style={Styles.UniversityName} id="university-name">{this.props.name}</a>
       </div>
     )
   }
 
   componentDidMount() {
+    if (!this.reference.current) return;
+
     this.reference.current.addEventListener('click', () => {
       const animationKeyframes: Keyframe[] = [
         {transform: 'scale(1)'},
@@ -31,15 +33,15 @@ class UniversityCard extends Preact.Component<Properties> {
         easing: 'ease-out'
       }
 
-      this.reference.current.animate(animationKeyframes, animationOptions);
+      this.reference.current?.animate(animationKeyframes, animationOptions);
 
-      window.location.href = `${networkPathes.base}/questions?universityUrl=${this.props.url}`;
+      window.open(`questions?universityUrl=${this.props.url}`, '_self');
     });
   }
 }
 
 class Styles {
-  static UniversityCard: Preact.JSX.CSSProperties = {
+  static UniversityCard: React.CSSProperties = {
     width: '85vw',
     height: '20vw',
 
@@ -54,7 +56,7 @@ class Styles {
     backgroundColor: '#d0bfff'
   }
 
-  static UniversityName: Preact.JSX.CSSProperties = {
+  static UniversityName: React.CSSProperties = {
     fontFamily: 'Roboto Slab',
     fontWeight: 'bold',
     fontSize: '7.5vw',
