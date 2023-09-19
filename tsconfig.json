@@ -1,11 +1,26 @@
 {
   "compilerOptions": {
-    "jsx": "preserve",
-    "jsxFactory": "Preact.h",
-    "jsxFragmentFactory": "Preact.Fragment",
+    "module": "ESNext",
+    "target": "ESNext",
+
+    "jsx": "react",
+    "jsxFactory": "React.createElement",
+    "jsxFragmentFactory": "React.Fragment",
 
     "esModuleInterop": true,
     "downlevelIteration": true,
-    "allowImportingTsExtensions": true
+    "strictNullChecks": true,
+
+    "baseUrl": ".",
+
+    "paths": {
+      "@components/*": ["source/client/components/*"],
+      "@helpers/*": ["source/client/helpers/*"],
+      "@resources/*": ["source/client/resources/*"],
+      "@scripts/*": ["source/client/scripts/*"],
+      "@pages/*": ["source/server/pages/*"],
+
+      "@server/*": ["source/server/*"]
+    }
   }
 }

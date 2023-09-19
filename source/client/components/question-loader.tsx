@@ -1,27 +1,34 @@
-import * as Preact from 'preact';
+/// <reference lib="dom"/>
 
-import QuestionCard from './question-card';
-import getRenderedComponent from '../helpers/get-rendered-component';
+import React from 'react';
 
-class QuestionLoader extends Preact.Component<Properties> {
-  questionLoaderReference: Preact.RefObject<HTMLDivElement>;
-  spinnerReference: Preact.RefObject<HTMLDivElement>;
+import QuestionCard from '@components/question-card';
+
+import addNode from '@helpers/add-node';
+
+class QuestionLoader extends React.Component<Properties> {
+  questionLoaderReference: React.RefObject<HTMLDivElement>;
+  spinnerReference: React.RefObject<HTMLDivElement>;
 
   constructor(properties: Properties) {
     super(properties);
-    this.questionLoaderReference = Preact.createRef();
-    this.spinnerReference = Preact.createRef();
+
+    this.questionLoaderReference = React.createRef();
+    this.spinnerReference = React.createRef();
   }
 
   render() {
     return (
-      <div ref={this.questionLoaderReference} style={Styles.QuestionLoader} class="question-loader">
-        <div ref={this.spinnerReference} style={Styles.Spinner} class="spinner"></div>
+      <div ref={this.questionLoaderReference} style={Styles.QuestionLoader} id="question-loader">
+        <div ref={this.spinnerReference} style={Styles.Spinner} id="spinner"></div>
       </div>
     )
   }
 
   async componentDidMount() {
+    if (!this.spinnerReference.current) return;
+    if (!this.questionLoaderReference.current) return;
+
     this.spinnerReference.current.animate([
       {transform: 'rotate(0deg)'},
       {transform: 'rotate(360deg)'},
@@ -33,8 +40,7 @@ class QuestionLoader extends Preact.Component<Properties> {
     const intersectionHandler: IntersectionObserverCallback = (entries) => {
       for (let entry of entries) {
         if (entry.isIntersecting) {
-          const questionCard = getRenderedComponent(<QuestionCard universityUrl={this.props.universityUrl}/>);
-          document.querySelector('.questions-container').append(questionCard);
+          addNode('#questions-container', <QuestionCard universityUrl={this.props.universityUrl}/>);
         }
       }
     }
@@ -49,7 +55,7 @@ class QuestionLoader extends Preact.Component<Properties> {
 }
 
 class Styles {
-  static QuestionLoader: Preact.JSX.CSSProperties = {
+  static QuestionLoader: React.CSSProperties = {
     width: '100%',
 
     display: 'flex',
@@ -58,13 +64,13 @@ class Styles {
     justifyContent: 'center'
   }
 
-  static Spinner: Preact.JSX.CSSProperties = {
+  static Spinner: React.CSSProperties = {
     width: '8vw',
     height: '8vw',
 
     border: '1vw solid #5f3dc4',
     borderTop: '1vw solid transparent',
-    borderRadius: '50%'
+    borderRadius: '100vmax'
   }
 }
 

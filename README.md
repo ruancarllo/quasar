@@ -14,7 +14,7 @@ To install Quasar on your cell phone, you can go to its [official website](https
 
 ## Serving
 
-You can also serve a server of this project on your local machine from its source code written in [TypeScript](https://www.typescriptlang.org). To do this, your computer must have the latest version of [NodeJS](https://nodejs.org) and [NPM](https://www.npmjs.com) installed. It is recommended to use [Git](https://git-scm.com) for project version control, although this is not mandatory.
+You can also serve a server of this project on your local machine from its source code written in [TypeScript](https://www.typescriptlang.org). To do this, your computer must have the latest version of [Bun](https://bun.sh) installed. It is recommended to use [Git](https://git-scm.com) for project version control, although this is not mandatory.
 
 With that ready, follow the following steps:
 
@@ -28,25 +28,25 @@ cd quasar
 2. **Installing dependencies:** Install the package dependencies with the command:
 
 ```sh
-npm install
+bun install
 ```
 
 3. **Running the server:** Expose the server on your local network, from:
 
 
 ```sh
-npm run serve
+bun run serve
 ```
 
-## Building
+Be aware that this application operates under a strict Cross-Origin Resource Sharing policy ([CORS](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing)), making it essential to use a [proxy]( https://en.wikipedia.org/wiki/Proxy_server) suitable for the requests made by the program.
 
-Although not recommended, you can build this application by generating a static website using:
+## Debugging
+
+You can test this application, transpiling the code every time a request occurs, running:
 
 ```sh
-npm run build
+bun run dev
 ```
-
-However, be aware that this application operates under a strict Cross-Origin Resource Sharing policy ([CORS](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing)), making it essential to use a [proxy]( https://en.wikipedia.org/wiki/Proxy_server) suitable for the requests made by the program.
 
 ## Preview
 

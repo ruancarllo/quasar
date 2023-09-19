@@ -1,8 +1,9 @@
-import getArrayRandomItem from './get-array-random-item.ts';
-import uniteHyperlinks from './unite-hyperlinks.ts';
-import networkPathes from './network-pathes.ts';
+/// <reference lib="dom"/>
 
-async function getRandomQuestionUrl(universityUrl: string, tries = 0): Promise<string> {
+import getArrayRandomItem from '@resources/get-array-random-item';
+import uniteHyperlinks from '@resources/unite-hyperlinks';
+
+async function getRandomQuestionUrl(universityUrl: string, tries = 0): Promise<string | undefined> {
   try {
     const examsRequest = await fetch(universityUrl);
     const examsHtml = await examsRequest.text();
@@ -13,7 +14,11 @@ async function getRandomQuestionUrl(universityUrl: string, tries = 0): Promise<s
     const examAnchors = examsDocument.querySelectorAll('a[title*="Resolução Comentada"]');
 
     const randomExamAnchor = getArrayRandomItem(Array.from(examAnchors));
-    const randomExamUrl = uniteHyperlinks(universityUrl, randomExamAnchor.getAttribute('href'));
+    const randomExamAnchorHref = randomExamAnchor.getAttribute('href');
+
+    if (!randomExamAnchorHref) return getRandomQuestionUrl(universityUrl, ++tries);
+
+    const randomExamUrl = uniteHyperlinks(universityUrl, randomExamAnchorHref);
 
     const questionsRequest = await fetch(randomExamUrl);
     const questonsHtml = await questionsRequest.text();
@@ -26,9 +31,11 @@ async function getRandomQuestionUrl(universityUrl: string, tries = 0): Promise<s
     const randomQuestionAnchor = getArrayRandomItem(Array.from(questionAnchors));
     const randomQuestionFullUrl = randomQuestionAnchor.getAttribute('data-url');
 
+    if (!randomQuestionFullUrl) return getRandomQuestionUrl(universityUrl, ++tries);
+
     const hostRegularExpression = /^https?:\/\/([A-Za-z0-9.-]+)/g;
 
-    const randomQuestionUrl = randomQuestionFullUrl.replace(hostRegularExpression, networkPathes.cursoObjetivo);
+    const randomQuestionUrl = randomQuestionFullUrl.replace(hostRegularExpression, '/curso-objetivo');
 
     return randomQuestionUrl;
   }
