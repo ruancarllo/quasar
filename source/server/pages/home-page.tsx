@@ -9,7 +9,7 @@ class HomePage extends React.Component {
       <html>
         <head>
           <meta charSet="utf-8"/>
-          <meta name="theme-color" content="#ffffff"/>
+          <meta name="theme-color" content="#7048e8"/>
 
           <base href={Config.appPath + '/'}/>
 
