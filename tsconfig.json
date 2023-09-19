@@ -1,26 +1,6 @@
 {
   "compilerOptions": {
-    "module": "ESNext",
-    "target": "ESNext",
-
-    "jsx": "react",
-    "jsxFactory": "React.createElement",
-    "jsxFragmentFactory": "React.Fragment",
-
-    "esModuleInterop": true,
-    "downlevelIteration": true,
-    "strictNullChecks": true,
-
-    "baseUrl": ".",
-
-    "paths": {
-      "@components/*": ["source/client/components/*"],
-      "@helpers/*": ["source/client/helpers/*"],
-      "@resources/*": ["source/client/resources/*"],
-      "@scripts/*": ["source/client/scripts/*"],
-      "@pages/*": ["source/server/pages/*"],
-
-      "@server/*": ["source/server/*"]
-    }
+    "strict": true,
+    "types": ["bun-types"]
   }
 }
