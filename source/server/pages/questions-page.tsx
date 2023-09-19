@@ -11,7 +11,7 @@ class QuestionsPage extends React.Component {
           <base href={Config.appPath + '/'}/>
 
           <meta charSet="utf-8"/>
-          <meta name="theme-color" content="#7048e8"/>
+          <meta name="theme-color" content="#ffffff"/>
 
           <script defer type="text/javascript" src="client/scripts/questions.tsx"></script>
           
