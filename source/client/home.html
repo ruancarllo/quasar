@@ -6,6 +6,9 @@
 
     <base href="quasar/">
 
+    <link rel="manifest" href="./static/manifest.json"/>
+    <link rel="shortcut icon" href="./static/quasar-icon-192.png" type="image/png"/>
+
     <script>
       window.addEventListener('DOMContentLoaded', function() {
         const universityCards = document.querySelectorAll('.university-card');
@@ -24,6 +27,8 @@
             window.open(`questions?universityName=${card.textContent}`, '_self');
           });
         }
+
+        
       });
     </script>
 

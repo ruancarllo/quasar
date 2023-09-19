@@ -35,6 +35,13 @@ class Server {
         const resultHTML = Bun.file('source/client/questions.html').stream();
         return new Response(resultHTML);
       }
+
+      const requestedFilePath = path.join('source', 'client', requestPath);
+
+      if (fs.existsSync(requestedFilePath)) {
+        const requestedFile = fs.readFileSync(requestedFilePath);
+        return new Response(requestedFile);
+      }
     }
 
     return new Response(undefined, {status: 404});
