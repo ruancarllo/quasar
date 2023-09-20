@@ -44,6 +44,11 @@ class Server {
       }
     }
 
+    if (requestURL.pathname.startsWith('/quasar-desktop')) {
+      const resultHTML = Bun.file('source/client/wrapper.html').stream();
+      return new Response(resultHTML);
+    }
+
     return new Response(undefined, {status: 404});
   }
 
