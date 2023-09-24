@@ -1,7 +1,57 @@
-node_modules
-bun.lockb
+# Third-party libraries related
+**/node_modules
+**/.dart_tool
+**/fonts
 
-.DS_Store
+# Lock files related
+**/pubspec.lock
+**/bun.lockb
 
-.upm
-.config
+# Metadata files related
+**/.metadata
+
+# Repl files related
+**/.upm
+**/.config
+
+# Flutter, Dart and Pub related
+**/.pub
+**/.packages
+**/.pub-cache
+**/.flutter-plugins
+**/.flutter-plugins-dependencies
+
+# Platform-specific related
+**/android
+**/ios
+**/web
+**/build
+
+# Android Studio build artifacts related
+**/android/app/debug
+**/android/app/profile
+**/android/app/release
+
+# Symbolication related
+**/app.*.symbols
+
+# Obfuscation related
+**/app.*.map.json
+
+# Miscellaneous
+*.class
+*.log
+*.pyc
+*.swp
+**/.svn
+**/.atom
+**/.history
+**/.buildlog
+**/.DS_Store
+**/migrate_working_dir
+
+# IntelliJ related
+*.iml
+*.ipr
+*.iws
+**/.idea
