@@ -1,0 +1,37 @@
+name: quasar
+description: A social-network like app to studying for Brazilian entrance exams.
+
+publish_to: 'none'
+version: 1.0.0
+
+environment:
+  sdk: ^3.1.2
+
+dependencies:
+  flutter:
+    sdk: flutter
+  http: ^1.1.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+  flutter_launcher_icons: ^0.13.1
+  rename: ^2.1.1
+
+flutter:
+  uses-material-design: true
+  fonts:
+    - family: RobotoSlab
+      fonts:
+        - asset: assets/fonts/Roboto_Slab/static/RobotoSlab-Bold.ttf
+          weight: 700
+
+flutter_launcher_icons:
+  web:
+    generate: true
+    image_path: assets/icons/quasar-icon.png
+  android: true
+  ios: true
+  image_path: assets/icons/quasar-icon.png
+  remove_alpha_ios: true
