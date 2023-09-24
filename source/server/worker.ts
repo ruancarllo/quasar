@@ -38,19 +38,19 @@ Bun.serve({
       const requestPath = requestURL.pathname.replace('/quasar', '');
 
       if (requestPath === '' || requestPath === '/') {
-        responsePath = path.join('source', 'client', 'home.html');
+        responsePath = path.join('source', 'client', 'build', 'home.html');
         responseFile = Bun.file(responsePath);
         responseStream = responseFile.stream();
       }
 
       else if (requestPath.startsWith('/questions')) {
-        responsePath = path.join('source', 'client', 'questions.html');
+        responsePath = path.join('source', 'client', 'build', 'questions.html');
         responseFile = Bun.file(responsePath);
         responseStream = responseFile.stream();
       }
 
       else if (requestPath.startsWith('/desktop')) {
-        responsePath = path.join('source', 'client', 'wrapper-desktop.html');
+        responsePath = path.join('source', 'client', 'build', 'wrapper-desktop.html');
         responseFile = Bun.file(responsePath);
         responseStream = responseFile.stream();
       }
@@ -139,3 +139,44 @@ type Color = {
   g: number,
   b: number
 }
+
+async function buildClientPages() {
+  const buildDirectory = path.join('source', 'client', 'build');
+  const pagesDirectory = path.join('source', 'client', 'pages');
+
+  const pagesSubdirectories = fs.readdirSync(pagesDirectory);
+
+  for (const subdirectory of pagesSubdirectories) {
+    const htmlFilePath = path.join(pagesDirectory, subdirectory, 'index.html');
+    const cssFilePath = path.join(pagesDirectory, subdirectory, 'style.css');
+    const tsFilePath = path.join(pagesDirectory, subdirectory, 'script.ts');
+
+    let htmlFileContent: string | undefined;
+    let cssFileContent: string | undefined;
+    let tsTranspiledContent: string | undefined;
+
+    if (fs.existsSync(htmlFilePath)) htmlFileContent = fs.readFileSync(htmlFilePath, 'utf-8');
+    if (fs.existsSync(cssFilePath)) cssFileContent = fs.readFileSync(cssFilePath, 'utf-8');
+
+    if (fs.existsSync(tsFilePath)) {
+      const tsBuildResult = await Bun.build({
+        entrypoints: [tsFilePath],
+        target: 'browser',
+        minify: true
+      });
+
+      tsTranspiledContent = await tsBuildResult.outputs[0].text();
+    }
+
+    let bundledHtml = '';
+    const bundledHtmlFilePath = path.join(buildDirectory, subdirectory + '.html');
+
+    if (htmlFileContent) bundledHtml += htmlFileContent;
+    if (cssFileContent) bundledHtml += `\n<style>${cssFileContent}</style>`;
+    if (tsTranspiledContent) bundledHtml += `\n<script>${tsTranspiledContent}</script>`;
+
+    if (bundledHtml) fs.writeFileSync(bundledHtmlFilePath, bundledHtml);
+  }
+}
+
+buildClientPages();

@@ -1,0 +1,64 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto+Slab:normal,bold');
+
+* {
+  margin: 0;
+  border: 0;
+  padding: 0;
+
+  box-sizing: border-box;
+  user-select: none;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+
+  background-color: #e5dbff;
+}
+
+#top-bubble {
+  width: 100vw;
+  height: 30vw;
+  padding: 10vw;
+  border-radius: 0vw 0vw 7.5vw 7.5vw;
+
+  display: grid;
+  place-content: center;
+
+  background-color: #7048e8;
+  box-shadow: 0vw 0vw 2vw 0vw #5f3dc4;
+}
+
+h1 {
+  font-family: 'Roboto Slab';
+  font-weight: bold;
+  font-size: 10vw;
+  color: #f3f0ff;
+}
+
+#bottom-area {
+  padding: 10vw 7.5vw 7.5vw 7.5vw;
+  gap: 7.5vw;
+
+  display: flex;
+  flex-direction: column;
+
+  overflow: hidden;
+}
+
+.university-card {
+  width: 85vw;
+  height: 20vw;
+  border-radius: 5vw;
+
+  display: grid;
+  place-content: center;
+
+  background-color: #d0bfff;
+  box-shadow: 0.5vw 0.5vw 2vw 0.5vw #b197fc;
+
+  font-family: 'Roboto Slab';
+  font-weight: bold;
+  font-size: 7.5vw;
+  color: #2a1b55;
+}
