@@ -175,6 +175,7 @@ async function buildClientPages() {
     if (cssFileContent) bundledHtml += `\n<style>${cssFileContent}</style>`;
     if (tsTranspiledContent) bundledHtml += `\n<script>${tsTranspiledContent}</script>`;
 
+    if (!fs.existsSync(buildDirectory)) fs.mkdirSync(buildDirectory);
     if (bundledHtml) fs.writeFileSync(bundledHtmlFilePath, bundledHtml);
   }
 }
